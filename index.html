@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        // 回文字符串
+        function isPalindromicStr(str) {
+            if (!str.length) return true;
+            str = str.toLowerCase().split('');
+            var state = 0;
+            var end = str.length - 1;
+            while (state < end) {
+                if (str[state] == str[end]) {
+                    state++;
+                    end--;
+                } else {
+                    return false
+                }
+            }
+            return true
+        }
+
+
+
+        var str1 = 'abcdedcba'
+        var str2 = 'abcdere'
+        console.log(isPalindromicStr(str2));
+
+
+
+        // 字符串去重
+        function removeDuplicateChar1(str) {
+            var arr = new Set(str.split(''))
+            return [...arr].join('')
+        }
+
+        function removeDuplicateChar2(str) {
+            var result = Array.prototype.filter.call(str, function (item, index, arr) {
+                return arr.indexOf(item) === index
+            })
+            return result.join('')
+        }
+
+
+        function removeDuplicateChar3(str) {
+            var result = ''
+            for (var i = 0; i < str.length; i++) {
+                var item = str[i]
+                if (result.indexOf(item) < 0) {
+                    result += item
+                }
+            }
+            return result
+        }
+
+        function removeDuplicateChar4(str) {
+            var result = []
+            var obj = {}
+            for (var i = 0; i < str.length; i++) {
+                var item = str[i]
+                if (!obj[item]) {
+                    obj[item] = true
+                    result.push(item)
+                }
+
+            }
+
+            return result.join('')
+        }
+
+
+        var str3 = 'asdeasdsadasdsad'
+        console.log(removeDuplicateChar4(str3));
+
+
+        // 查找字符串出现最对次数
+        function getMaxCount(str) {
+            var obj = {}
+            for (var i = 0; i < str.length; i++) {
+                if (!obj[str.charAt(i)]) {
+                    obj[str.charAt(i)] = 1
+                } else {
+                    obj[str.charAt(i)]++
+                }
+            }
+
+            var maxKey = '';
+            var maxNum = 0;
+            for (let item in obj) {
+                if (obj[item] > maxNum) {
+                    maxNum = obj[item]
+                    maxKey = item
+                }
+            }
+
+            return `出现次数最多的字符是${maxKey},一共出现了${maxNum}次`
+        }
+
+        var str4 = 'asdhgasjhdgasjdgasdjhas'
+        console.log(getMaxCount(str4));
+
+
+
+
+    </script>
+</body>
+
+</html>
